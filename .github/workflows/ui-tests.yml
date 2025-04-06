@@ -19,11 +19,12 @@ jobs:
 
       - name: Build and test
         run: |
-          xcodebuild test \
-            -workspace youtube-player-ios-example.xcworkspace \
-            -scheme youtube-player-ios-example \
-            -destination 'platform=iOS Simulator,name=iPhone 15,OS=16.2' \
-            -derivedDataPath build
+            xcodebuild test \
+              -workspace Project/youtube-player-ios-example/youtube-player-ios-example.xcworkspace \
+              -scheme youtube-player-ios-example \
+              -destination "platform=iOS Simulator,name=iPhone 15,OS=16.2" \
+              -derivedDataPath build
+
 
       # - name: Upload test results
       #   uses: actions/upload-artifact@v2
