@@ -38,6 +38,22 @@
                                            selector:@selector(receivedPlaybackStartedNotification:)
                                                name:@"Playback started"
                                              object:nil];
+    // 延迟3秒展示广告
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        UIView *adView = [[UIView alloc] initWithFrame:CGRectMake(20, 100, 300, 80)];
+        adView.backgroundColor = [UIColor systemYellowColor];
+        adView.layer.cornerRadius = 10;
+        adView.accessibilityIdentifier = @"AdBanner";
+
+        UILabel *label = [[UILabel alloc] initWithFrame:adView.bounds];
+        label.text = @"🔥 Limited-time Offer! Tap to learn more!";
+        label.textAlignment = NSTextAlignmentCenter;
+        label.numberOfLines = 2;
+        label.font = [UIFont boldSystemFontOfSize:14];
+
+        [adView addSubview:label];
+        [self.view addSubview:adView];
+    });
 }
 
 - (void)playerView:(YTPlayerView *)ytPlayerView didChangeToState:(YTPlayerState)state {

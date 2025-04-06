@@ -1,0 +1,37 @@
+{
+  "configurations" : [
+    {
+      "id" : "EE62CDA8-4AAA-4C32-9668-2F2977632E02",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:youtube-player-ios-example.xcodeproj",
+      "identifier" : "4D6993DD18E22E0C0073680F",
+      "name" : "youtube-player-ios-example"
+    }
+  },
+  "testTargets" : [
+    {
+      "enabled" : false,
+      "target" : {
+        "containerPath" : "container:youtube-player-ios-example.xcodeproj",
+        "identifier" : "4D6993FE18E22E0C0073680F",
+        "name" : "youtube-player-ios-exampleTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:youtube-player-ios-example.xcodeproj",
+        "identifier" : "2BB6AB0E2DA1AEFC00FB22F8",
+        "name" : "AdUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
