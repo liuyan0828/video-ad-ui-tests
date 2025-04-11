@@ -1,4 +1,4 @@
-name: Run XCUI Tests
+name: iOS CI
 
 on:
   push:
@@ -7,22 +7,33 @@ on:
     branches: [ main ]
 
 jobs:
-  ui-tests:
+  build-and-test:
     runs-on: macos-latest
+
+    defaults:
+      run:
+        working-directory: Project/youtube-player-ios-example
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-#      - name: Set up Xcode
-#        run: sudo xcode-select -s /Applications/Xcode_14.2.app
+      - name: Set up Ruby (for CocoaPods)
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
 
       - name: Install CocoaPods
-      working-directory: Project/youtube-player-ios-example
-      run: pod install
+        run: |
+          gem install cocoapods
+          pod install
+
+      - name: Show workspace content
+        run: |
+          pwd
+          ls -al
 
       - name: Run UI Tests
-        working-directory: Project/youtube-player-ios-example
         run: |
           xcodebuild test \
             -workspace youtube-player-ios-example.xcworkspace \
@@ -30,14 +41,10 @@ jobs:
             -destination "platform=iOS Simulator,name=iPhone 15,OS=16.2" \
             -derivedDataPath build
 
-
-
-
-
-
-      # - name: Upload test results
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: test-results
-      #     path: build/Logs/Test
-
+      - name: Upload test result bundle (optional)
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: xcode-result-bundle
+          path: /var/folders/**/ResultBundle_*.xcresult
+          retention-days: 7
