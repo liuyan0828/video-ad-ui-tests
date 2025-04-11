@@ -20,6 +20,7 @@ jobs:
       - name: Run UI Tests
         working-directory: Project/youtube-player-ios-example
         run: |
+          pwd && ls -al
           xcodebuild test \
             -workspace youtube-player-ios-example.xcworkspace \
             -scheme youtube-player-ios-example \
